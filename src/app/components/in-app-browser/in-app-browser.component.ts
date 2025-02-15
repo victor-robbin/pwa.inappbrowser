@@ -15,7 +15,7 @@ export class InAppBrowserComponent {
   // @Input() url!: string;
   @Input() title: string = 'In-App Browser';
   // @Output() urlChange = new EventEmitter<string>();
-  // @Output() close = new EventEmitter<void>();
+  @Output() close = new EventEmitter<void>();
 
   @ViewChild('browserContainer', { static: true }) containerRef!: ElementRef;
 
@@ -25,7 +25,7 @@ export class InAppBrowserComponent {
   constructor() { }
 
   ngOnInit(): void {
-    console.log('InAppBrowserComponent создан');
+    // console.log('InAppBrowserComponent создан');
     // if (!this.url) {
     //   console.log('URL is required to use the in-app browser.');
     //   return;
@@ -61,16 +61,16 @@ export class InAppBrowserComponent {
     }
   }
 
-  // closeBrowser(): void {
-  //   this.close.emit();
-  // }
-
-  closeBrowser() {
-    this.router.navigate(['/']);
+  closeBrowser(): void {
+    this.close.emit();
   }
 
+  // closeBrowser() {
+  //   this.router.navigate(['/']);
+  // }
+
   ngOnDestroy(): void {
-    console.log('InAppBrowserComponent удален');
+    // console.log('InAppBrowserComponent удален');
     if (this.iframeElement) {
       this.renderer.removeChild(this.containerRef.nativeElement, this.iframeElement);
     }

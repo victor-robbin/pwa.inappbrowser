@@ -1,1 +1,5 @@
 <button (click)="openIframe()">Open iframe</button>
+
+@if (opened()) {
+  <app-in-app-browser (close)="closeIframe()"/>
+}

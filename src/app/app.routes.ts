@@ -8,9 +8,9 @@ export const routes: Routes = [
     {
         path: '', component: PaymentFormComponent,
     },
-    {
-        path: 'iframe', component: InAppBrowserComponent,
-    },
+    // {
+    //     path: 'iframe', component: InAppBrowserComponent,
+    // },
     {
         path: 'inframe', component: InFrameComponent,
     },
