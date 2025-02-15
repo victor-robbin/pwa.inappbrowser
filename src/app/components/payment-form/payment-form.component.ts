@@ -6,26 +6,15 @@ import { InAppBrowserComponent } from '../in-app-browser/in-app-browser.componen
   selector: 'app-payment-form',
   standalone: true,
   imports: [
-    InAppBrowserComponent,
+
   ],
   templateUrl: './payment-form.component.html',
   styleUrl: './payment-form.component.scss'
 })
 export class PaymentFormComponent {
-  isPaying = false;
-  bankUrl = '/bank'; // Эмуляция URL банка
+  router = inject(Router);
 
-  startPayment() {
-    this.isPaying = true;
-  }
-
-  onUrlChange(newUrl: string) {
-    if (newUrl.includes('/payment-result')) {
-      this.isPaying = false; // Закрываем iframe при переходе на результат
-    }
-  }
-
-  closeBrowser() {
-    this.isPaying = false;
+  openIframe() {
+    this.router.navigate(['/iframe']);
   }
 }

@@ -1,16 +1,1 @@
-<h2>Payment</h2>
-<form >
-    <label>
-        Enter smth:
-        <input type="text" required>
-    </label>
-    <button (click)="startPayment()">Submit</button>
-</form>
-
-@if (isPaying) {
-<app-in-app-browser
-  [url]="bankUrl"
-  (urlChange)="onUrlChange($event)"
-  (close)="closeBrowser()"
-></app-in-app-browser>
-}
+<button (click)="openIframe()">Open iframe</button>
