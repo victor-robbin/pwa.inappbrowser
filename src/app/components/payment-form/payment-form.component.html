@@ -1,5 +1,9 @@
-<button (click)="openIframe()">Open iframe</button>
+<div class="content">
+  <p>"This is some Home component"</p>
+  <button (click)="openIframe()">Open iframe</button>
+</div>
 
 @if (opened()) {
-  <app-in-app-browser (close)="closeIframe()"/>
+  <app-in-app-browser [class.opened]="opened()" (close)="closeIframe()" @fadeAnimation/>
+  <app-backdrop (click)="closeIframe()"/>
 }
