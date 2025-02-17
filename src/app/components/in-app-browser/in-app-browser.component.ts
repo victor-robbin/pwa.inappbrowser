@@ -10,11 +10,13 @@ import { Router } from '@angular/router';
 })
 export class InAppBrowserComponent {
   renderer = inject(Renderer2);
+  element = inject(ElementRef);
   router = inject(Router);
 
   url = signal('/inframe');
   title = input('In-App Browser');
   close = output();
+  startY = 0;
 
   @ViewChild('browserContainer', { static: true }) containerRef!: ElementRef;
 
@@ -31,6 +33,20 @@ export class InAppBrowserComponent {
     }
 
     window.addEventListener('message', this.handleMessage.bind(this));
+  }
+
+  ngAfterViewInit() {
+    this.renderer.listen(this.element.nativeElement, 'touchstart', (event: TouchEvent) => {
+      this.startY = event.touches[0].clientY;
+    });
+    this.renderer.listen(this.element.nativeElement, 'touchend', (event: TouchEvent) => {
+      const endY = event.changedTouches[0].clientY;
+      const deltaY = endY - this.startY;
+
+      if (deltaY > 50) {
+        this.closeBrowser();
+      }
+    });
   }
 
   handleMessage(event: MessageEvent) {
